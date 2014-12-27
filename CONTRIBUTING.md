@@ -56,11 +56,4 @@ By making a contribution to this project, I certify that:
 ```
 
 
-## Testing
-
-``` bash
-$ phpspec run
-```
-
-
 **Happy coding**!
