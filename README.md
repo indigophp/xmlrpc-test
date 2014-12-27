@@ -19,6 +19,8 @@ $ composer create-project indigophp/xmlrpc-test
 
 You can use this simple application to test any XML-RPC endpoint.
 
+![screenshot](https://github.com/indigophp/xmlrpc-test/raw/develop/resources/screenshot.png "Screenshot")
+
 
 ## Future plans
 
