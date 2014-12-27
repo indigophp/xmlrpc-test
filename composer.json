@@ -1,7 +1,7 @@
 {
     "name": "indigophp/xmlrpc-test",
     "type": "project",
-    "description": "XML-RPC Client test tool",
+    "description": "XML-RPC test tool",
     "license": "MIT",
     "keywords": ["xmlrpc", "client", "test"],
     "homepage": "https://indigophp.com",
