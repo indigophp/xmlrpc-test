@@ -21,18 +21,19 @@ You can use this simple application to test any XML-RPC endpoint.
 
 ![screenshot](https://github.com/indigophp/xmlrpc-test/raw/develop/resources/screenshot.png "Screenshot")
 
+You can simply run the following command to start the builtin PHP server
+
+``` bash
+$ robo server
+```
+
+**Note:** You have to install [robo](http://robo.li) into your prefix.
+
 
 ## Future plans
 
 - Generate JSON schema based on method signature
 - Support authentication (eg. basic auth)
-
-
-## Testing
-
-``` bash
-$ phpspec run
-```
 
 
 ## Contributing
