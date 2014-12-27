@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app="xmlrpcTest">
+<head>
+	<title>XML-RPC test tool</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/jsoneditor.min.css">
+</head>
+<body ng-controller="XmlrpcCtrl">
+	<div class="container" style="margin-top: 20px;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">XML-RPC test tool</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="uri">URI</label>
+							<input type="text" ng-model="uri" class="form-control" id="uri" placeholder="URI (eg. http://domain.com/RPC2)">
+						</div>
+						<div class="form-group">
+							<select ng-model="method" ng-options="item.longName for item in methods" ng-change="methodChanged()"></select>
+						</div>
+						<div class="form-group" ng-show="method.name == 'custom'">
+							<label for="method">Method</label>
+							<input type="text" ng-model="methodNameOverride" class="form-control" id="method" placeholder="Method">
+						</div>
+						<div>
+							<label for="description">Description</label>
+							<p id="description">{{ method.description }}</p>
+						</div>
+						<div ng-show="method.signature.length > 0">
+							<label>Method siganture</label>
+							<ul>
+								<li ng-repeat="type in method.signature"><b>param {{ $index }}:</b> {{ type }}</li>
+							</ul>
+						</div>
+						<div ng-show="method.returnType !== undefined">
+							<label>Return type:</label>
+							<b>{{ method.returnType }}</b>
+						</div>
+						<jsoneditor id="jsoneditor" ng-model="json" ng-style="{height: '300px'}"></jsoneditor>
+						<p>{{ response }}</p>
+					</div>
+					<div class="panel-footer">
+						<button ng-click="listMethods()" id="list" class="btn btn-primary">List methods</button>
+						<button ng-click="send()" class="btn btn-success pull-right">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/angular.js"></script>
+	<script src="assets/js/angular-resource.min.js"></script>
+	<script src="assets/js/jsoneditor.min.js"></script>
+	<script src="assets/js/jsonlint.js"></script>
+	<script src="assets/js/ace/ace.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script>
+		// var container = document.getElementById("jsoneditor");
+		// var editor = new JSONEditor(container, {
+		// 	modes: ['code', 'form', 'text', 'tree', 'view']
+		// });
+	</script>
+</body>
+</html>

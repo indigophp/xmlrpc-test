@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hu" class="<%= modernizrClass %>no-js">
+<head>
+	<title>XML-RPC test tool</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="<%= path.asset %>/js/lib/html5shiv.js"></script>
+		<script src="<%= path.asset %>/js/lib/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">XML-RPC test tool</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="uri">URI</label>
+							<input type="text" class="form-control" id="uri" placeholder="URI (eg. http://domain.com/RPC2)">
+						</div>
+						<div class="form-group">
+							<select name="methods" id="methods">
+								<option value="custom">Custom method...</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="method">Method</label>
+							<input type="text" class="form-control" name="method" id="method" placeholder="Method">
+						</div>
+						<div>
+							<label for="description">Description</label>
+							<p id="description">Not available</p>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<button id="list" class="btn btn-primary">List methods</button>
+						<button class="btn btn-success pull-right">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<script>
+		(function($) {
+			$('#list').on('click', function(e) {
+				$.ajax('/listMethods', {
+					data: {
+						'uri': $('#uri').val()
+					},
+					success: function(data) {
+						$('#methods').val('custom').trigger('change');
+						$('#methods option').each(function(i, el) {
+							if ($(this).val() !== 'custom') {
+								$(this).remove();
+							}
+						});
+
+						$.each(data, function(i, el) {
+							$('#methods').append('<option value="'+el+'">'+el+'</option>');
+						});
+					}
+				});
+			});
+
+			$('#methods').on('change', function (e) {
+				if ($(this).val() == 'custom') {
+					$('#method').prop('disabled', false).val('');
+					$('#description').html('Not available');
+				} else {
+					$('#method').prop('disabled', true).val($(this).val());
+
+					$.ajax('/getMethodInfo/'+$(this).val(), {
+						data: {
+							'uri': $('#uri').val()
+						},
+						success: function(data) {
+							$('#description').html(data.description);
+						}
+					});
+				}
+			});
+		})(jQuery);
+	</script>
+</body>
+</html>
