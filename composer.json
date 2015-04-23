@@ -12,10 +12,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "alexbilbie/proton": "~1.0.0",
-        "lstrojny/fxmlrpc": "~0.9.0",
-        "guzzlehttp/guzzle": "~5.1.0"
+        "php": ">=5.4",
+        "alexbilbie/proton": "~1.4",
+        "lstrojny/fxmlrpc": "~1.0@alpha",
+        "guzzlehttp/guzzle": ">=4.0"
     },
     "autoload": {
         "psr-4": {
